@@ -1,6 +1,21 @@
 function displayTemperature(response) {
   let temp = document.querySelector(".current-temperature-value");
   temp.innerHTML = Math.round(response.data.temperature.current);
+
+  let country = document.querySelector(".country");
+  country.innerHTML = response.data.country;
+
+  let icon = document.querySelector(".current-temperature-icon");
+  icon.innerHTML = response.data.condition.icon;
+
+  let description = document.querySelector("#current-desc");
+  description.innerHTML = response.data.condition.description;
+
+  let humidity = document.querySelector("#humid");
+  humidity.innerHTML = Math.round(response.data.temperature.humidity);
+
+  let wind = document.querySelector("#windy");
+  wind.innerHTML = response.data.wind.speed;
 }
 
 function search(event) {
