@@ -5,14 +5,14 @@ function displayTemperature(response) {
   let temp = document.querySelector(".current-temperature-value");
   temp.innerHTML = Math.round(response.data.temperature.current);
 
-  let icon = document.querySelector(".current-temperature-icon");
-  icon.innerHTML = response.data.condition.icon_url;
+  let icon = document.querySelector(".icon");
+  icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />`;
 
   let description = document.querySelector("#current-desc");
   description.innerHTML = response.data.condition.description;
 
   let humidity = document.querySelector("#humid");
-  humidity.innerHTML = `${response.data.temperature.humidity}&`;
+  humidity.innerHTML = `${response.data.temperature.humidity}%`;
 
   let wind = document.querySelector("#windy");
   wind.innerHTML = `${response.data.wind.speed}km/h`;
@@ -66,7 +66,7 @@ function formatDate(date) {
   ];
 
   let formattedDay = days[day];
-  return `${formattedDay} ${hours}:${minutes}`;
+  return `${formattedDay} ${hours}:${minutes},`;
 }
 
 let searchForm = document.querySelector("#search-form");
