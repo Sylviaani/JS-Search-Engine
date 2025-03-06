@@ -76,3 +76,28 @@ let currentDateELement = document.querySelector("#current-date");
 let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
+
+function displayForecast() {
+  let forecast = document.querySelector("#forecast");
+  let forecastHtml = "";
+
+  let days = ["Tue", "Wed", "Thurs", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `<div>
+            <div class="weather-forecast-day">${day}</div>
+            <div class="weather-forecast-icon">☁</div>
+            <div class="weather-forecast-temperature">
+              <div class="weather-forecast-temperature-1">
+                <strong>15&deg;</strong>
+              </div>
+              <div class="weather-forecast-temperature-1">9&deg;</div>
+            </div>
+          </div>`;
+  });
+
+  forecast.innerHTML = forecastHtml;
+}
+
+displayForecast();
