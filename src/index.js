@@ -78,25 +78,38 @@ let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
 function displayForecast(response) {
   console.log(response.data);
+
   let forecast = document.querySelector("#forecast");
   let forecastHtml = "";
 
-  let days = ["Tue", "Wed", "Thurs", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `<div>
-            <div class="weather-forecast-day">${day}</div>
-            <div class="weather-forecast-icon">☁</div>
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `<div>
+            <div class="weather-forecast-day">${formatDay(day.time)}</div>
+            <img src = "${
+              day.condition.icon_url
+            }" class="weather-forecast-icon"/>
             <div class="weather-forecast-temperature">
               <div class="weather-forecast-temperature-1">
-                <strong>15&deg;</strong>
+                <strong>${Math.round(day.temperature.maximum)}&deg;</strong>
               </div>
-              <div class="weather-forecast-temperature-1">9&deg;</div>
+              <div class="weather-forecast-temperature-1">${Math.round(
+                day.temperature.minimum
+              )}&deg;</div>
             </div>
           </div>`;
+    }
   });
 
   forecast.innerHTML = forecastHtml;
