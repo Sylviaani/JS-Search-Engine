@@ -25,6 +25,7 @@ function displayTemperature(response) {
 
   // let country = document.querySelector(".country");
   // country.innerHTML = response.data.country;
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -77,7 +78,8 @@ let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data);
   let forecast = document.querySelector("#forecast");
   let forecastHtml = "";
 
@@ -100,4 +102,9 @@ function displayForecast() {
   forecast.innerHTML = forecastHtml;
 }
 
-displayForecast();
+function getForecast(city) {
+  let apiKey = "d3d1dee4f0701o614001t040202aba72";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=d3d1dee4f0701o614001t040202aba72&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
